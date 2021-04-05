@@ -1,1 +1,1 @@
-# React_small_projects
+# Beginner projects in React
