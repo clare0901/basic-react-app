@@ -1,0 +1,74 @@
+/* Header.js */
+
+.header{
+    height: 60px;
+    color: white;
+    text-shadow: 2px 2px black;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    padding-top: 20px;
+}
+
+/* Name.js */
+
+.name{
+    margin: 50px;
+}
+
+.name > input:focus{
+    border-bottom: 2px solid darkgray;
+}
+
+.name > input{
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+
+/* ColorPicker.js */
+
+.color-picker{
+    margin: 0 0 0 40px;
+    border: none;
+    padding: 0;
+
+}
+
+.color-picker  input{
+    opacity: 0;
+    position: absolute;
+}
+
+.color-picker span{
+    display: inline-block;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 5px 15px 0 20px;
+    border: 2px solid black;
+    transition: 0.5s;
+}
+
+.color-picker label:hover span{
+    transform: rotate(45deg);
+}
+
+.color-picker label{
+    cursor: pointer;
+}
+
+.color-picker input:checked + span {
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+}
+
+.refresh{
+    float:right;
+    margin: -40px 20px 0 0;
+}
