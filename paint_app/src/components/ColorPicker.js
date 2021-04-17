@@ -9,6 +9,7 @@ function ColorPicker(props){
             {props.colors.map( (color,id) => (
                 <label key={id}>
                     <input 
+                    ref={props.colorpickerRef}
                     type="radio"
                     name="color"
                     value={color}

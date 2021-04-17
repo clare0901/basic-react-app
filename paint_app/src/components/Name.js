@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-function Name(){
+// used React.memo to avoid multiple rendering unneccesarily even though the state doesn't change
+
+const Name = React.memo( (props) => {
+    // console.log(props);
     const [name, setName] = useState('');
 
     function handleChange(event){
@@ -18,6 +21,7 @@ function Name(){
         <div>
             <div className="name">
                 <input 
+                ref={props.nameRef}
                 type="text"
                 value={name}
                 placeholder="Unititled"
@@ -27,6 +31,6 @@ function Name(){
             </div>
         </div>
     )
-}
+} )
 
 export default Name;
