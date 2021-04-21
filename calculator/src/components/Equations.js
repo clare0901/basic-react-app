@@ -7,7 +7,7 @@ function Equations(){
     const buttonEquations = [
     {text: 'DEL', class: 'delete'},
     {text: '÷', class: 'divide'},
-    {text: '×', class: 'multiply'},
+    {text: '*', class: 'multiply'},
     {text: '-', class: 'subtract'},
     {text: '+', class: 'add'}
     ]

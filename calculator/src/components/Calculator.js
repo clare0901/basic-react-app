@@ -8,10 +8,9 @@ class Calculator extends Component {
     constructor() {
         super();
         this.state = {
-            oldNum:'',
             currNum: "",
             total: 0,
-            flag: "",
+            oldNum: "",
             memory: "",
             operation: ""
         };
@@ -20,17 +19,15 @@ class Calculator extends Component {
 
     number(e) {
         let name = e.target.className;
+
         if (name === "decimal") {
             name = ".";
         }
-        // set number to current num
-        // this.setState({ currNum: name });
+        this.setState({currNum:name});
 
-
-        this.setState((prevState)=>({
-            currNum: name,
-            oldNum: prevState.currNum + name,
-        }));
+        // this.setState((prevState)=>({
+        //     currNum: prevState.currNum + name
+        // }));
 
 
         if (this.state.total !== 0) {
@@ -47,7 +44,6 @@ class Calculator extends Component {
     delete() {
         this.setState({
             total: "",
-            oldNum:'',
             currNum: "",
             memory: "",
             operation: ''
@@ -63,7 +59,7 @@ class Calculator extends Component {
             if (
                 name !== "delete" &&
                 name !== "divide" &&
-                name !== "multipy" &&
+                name !== "multiply" &&
                 name !== "subtract" &&
                 name !== "add" &&
                 name !== "equals"
@@ -77,44 +73,56 @@ class Calculator extends Component {
 
             // operations
             if (name === "add") {
-                this.setState((prevState)=>({
-                    oldNum: prevState.currNum + '+',
-                    currNum: '+',
+                // this.setState((prevState)=>({
+                //     currNum: prevState.currNum + '+'
+                // }));
+        
+                this.setState({
+                    currNum:'+',
                     memory: this.state.total,
                     total: '',
                     operation: '+',
-                }));
+                });
             }
 
             if (name === "subtract") {
-                this.setState((prevState) => ({
-                    oldNum: prevState.currNum + '-',
-                    currNum: '-',
+                // this.setState((prevState)=>({
+                //     currNum: prevState.currNum + '-'
+                // }));
+    
+                this.setState({
+                    currNum:'-',
                     memory: this.state.total,
                     total: '',
                     operation: '-',
-                }));
+                });
             }
 
             if (name === "multiply") {
-                this.setState((prevState) => ({
-                    oldNum: prevState.currNum + '*',
-                    currNum: '*',
+                // this.setState((prevState)=>({
+                //     currNum: prevState.currNum + '*'
+                // }));
+        
+                this.setState({
+                    currNum:'*',
                     memory: this.state.total,
                     total: '',
                     operation: '*',
-                }));
+                });
             }
 
             if (name === "divide") {
-                this.setState((prevState)=>({
-                    oldNum: prevState.currNum + '/',
-                    currNum: '/',
+                // this.setState((prevState)=>({
+                //     currNum: prevState.currNum + '/'
+                // }));
+        
+                this.setState({
+                    currNum:'/',
                     memory: this.state.total,
                     total: '',
                     operation: '/',
                     
-                }));
+                });
             }
 
 
@@ -129,18 +137,13 @@ class Calculator extends Component {
                 if (!operation) this.delete();
                 if (isNaN(memory)) memory = 0;
                 if (isNaN(total)) total = 0;
-                
-                // console.log(this.state.total)
-                
+
                 if (operation === "+") this.setState({ total: memory + total });
                 if (operation === "-") this.setState({ total: memory - total });
                 if (operation === "*") this.setState({ total: memory * total });
                 if (operation === "/") this.setState({ total: memory / total });
             }
 
-            // this.setState((prevState) => {
-            //     console.log(prevState)   
-            // })
         }
     }
 
@@ -153,13 +156,12 @@ class Calculator extends Component {
         return (
             <div className="">
                 <main className="">
-                    <p>old num : {this.state.oldNum}</p>
                     <p>curr num : {this.state.currNum}</p>
                     <p> total : {this.state.total}</p>
                     {/* <p> memory: {this.state.memory}</p> */}
                     {/* <p> operation: {this.state.operation}</p> */}
 
-                    <Screen number={this.state.oldNum} />
+                    <Screen number={this.state.total} />
 
                     <div className="calculator-body">
                         <Numbers />
