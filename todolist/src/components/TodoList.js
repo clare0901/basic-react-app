@@ -1,46 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import TodoItem from './TodoItem'
-import data from '../Data'
 import '../App.css';
+import db from '../firebase';
+import firebase from 'firebase';
 
-class TodoList extends Component {
-    constructor(){
-        super()
-        this.state = {
-            todos : data
-        }
-        this.handleChange = this.handleChange.bind(this)
-    }
+function TodoList() {
+    const [todos, setTodos] = useState([]);
+    const [input, setInput] = useState('');
 
-    handleChange(id){
-        this.setState( prevState => {
-            const updatedTodos = this.state.todos.map( eachTodo => {
-                if(eachTodo.id === id){
-                    return{
-                        ...eachTodo,
-                        completed: !eachTodo.completed
-                    }
-                }
-                // if the if statement isnt true
-                return eachTodo
-            })
-            return{
-                todos:updatedTodos
-            }
+    useEffect(() => {
+        db.collection('todos').orderBy('timestamp','asc').onSnapshot(snapshot => {
+            // gives array of object
+            // console.log(snapshot.docs.map(doc => doc.data()))
+            // todos.todos.todo
+            setTodos(snapshot.docs.map(doc => ({ id: doc.id , todos: doc.data() }) ))
         })
-        
+    }, [input]);
+
+
+    function handleChange(event) {
+        setInput(event.target.value)
     }
 
-    render() { 
-        const TodoItemComponents = this.state.todos.map( todo => 
-            <TodoItem item={todo} key={todo.id} handleChange={this.handleChange} />
-        )
-        return ( 
+    function handleClick(event) {
+        event.preventDefault();
+
+        db.collection('todos').add({
+            todo:input,
+            completed:false,
+
+            // get a timestamp
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
+        // locally
+        setInput('');
+    }
+
+    const TodoItemComponents = todos.map(todo =>
+        // console.log(todo)
+        <TodoItem item={todo} key={todo.id} handleChange={handleChange} />
+    )
+
+    return (
+        <div className="main-div">
+            <div className="form-div">
+                <form>
+                    <FormControl>
+                        <InputLabel  htmlFor="my-input">Add Task</InputLabel>
+                        <Input value={input} onChange={handleChange} style={{width:"500px"}} />
+                    </FormControl>
+                    <Button type="submit" onClick={handleClick} disabled={!input} variant="contained" color="primary">
+                        Add
+                    </Button>
+                </form>
+            </div>
+
             <div className="todo-list">
                 {TodoItemComponents}
             </div>
-        )
-    }
+        </div>
+    );
 }
- 
+
 export default TodoList;

@@ -1,6 +1,5 @@
 body {
   font-family: "Times New Roman", Times, serif;
-
   background-color: whitesmoke;
 }
 
@@ -13,12 +12,16 @@ body {
   align-items: center;
   border: 1px solid #efefef;
   box-shadow:
-            /* The top layer shadow */ 0 1px 1px
-      rgba(0, 0, 0, 0.15),
-    /* The second layer */ 0 10px 0 -5px #eee,
-    /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
-    /* The third layer */ 0 20px 0 -10px #eee,
-    /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+    /* The top layer shadow */ 
+    0 1px 1px rgba(0, 0, 0, 0.15),
+    /* The second layer */ 
+    0 10px 0 -5px #eee,
+    /* The second layer shadow */ 
+    0 10px 1px -4px rgba(0, 0, 0, 0.15),
+    /* The third layer */ 
+    0 20px 0 -10px #eee,
+    /* The third layer shadow */ 
+    0 20px 1px -9px rgba(0, 0, 0, 0.15);
   padding: 30px;
 }
 
@@ -49,7 +52,7 @@ input[type="checkbox"]:focus {
 .navbar {
   height: 100px;
   padding: 20px;
-  margin: 0 0 80px 0;
+  margin: 0 0 60px 0;
 }
 .title {
   color: white;
@@ -61,7 +64,20 @@ input[type="checkbox"]:focus {
   background-color: lightblue;
   text-align: center;
   padding: 22px;
-  height: 100vh;
+  /* height: 0vh; */
   width: 100vw;
-  position: fixed;
+  /* position: fixed; */
+}
+
+.form{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+} 
+
+/* centers the form */
+.form-div{
+  display: block;
+  text-align: center;
+  margin: 0 0 50px 0;
 }
